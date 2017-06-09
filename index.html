@@ -6,27 +6,31 @@
     </head>
     <body>
    
-    <h3>Rectangle:</h3>
-    <input id="recWidth" type="text"><input id="recHeight" type="text"><button id="recBtn">Insert</button>
-    <h3>Square:</h3>
-    <input id="sqSide" type="text"><button id="sqBtn">Insert</button>
-    <h3>Circle</h3>
-    <input id="circRadius" type="text"><button id="circBtn">Insert</button>
-    <h3>Isoceles Right Triangle:</h3>
-    <input id="triHeight" type="text"><button id="triBtn">Insert</button>
+        <h3>Circle:</h3>
+        <input id="circle" type="text" placeholder="radius"/>
+        <button id="circleBtn">Insert</button>
+
+        <h3>Isoceles Right Triangle:</h3>
+        <input id="triHeight" type="text" placeholder="height"/>
+        <button id="triangleBtn">Insert</button>
+
+        <h3>Rectangle:</h3>
+        <input id="recWidth" type="text" placeholder="width"/>
+        <input id="recHeight" type="text" placeholder="height"/>
+        <button id="rectangleBtn">Insert</button>
+        
+        <h3>Square:</h3>
+        <input id="sqSide" type="text" placeholder="side length"/>
+        <button id="squareBtn">Insert</button>
     
-    <div id="myCanvas">
-    <div id="myValues">
-    <h6 class="currentShape">Shape Name:</h6>
-    <h6 class="currentWidth">Width:</h6>
-    <h6 class="currentHeight">Height:</h6>
-    <h6 class="currentRadius">Radius:</h6>
-    <h6 class="currentArea">Area:</h6>
-    <h6 class="currentPerimeter">Perimeter:</h6>
-    </div>
-    </div>
-
-
+        <div id="myCanvas"></div>
+        <h6 id="shapeName">Shape Name:</h6>
+        <h6 id="currentWidth">Width:</h6>
+        <h6 id="currentHeight">Height:</h6>
+        <h6 id="currentRadius">Radius:</h6>
+        <h6 id="currentArea">Area:</h6>
+        <h6 id="currentPerimeter">Perimeter:</h6>
+        
     <script src="app.js"></script>
     </body>
 </html>

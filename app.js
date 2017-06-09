@@ -1,92 +1,127 @@
 //OOP Class to make shapes:
 // Shape constructor
-function Shape() {
-    this.name = name;
-    
+function Shape(name, width, height) {
+    this.name = 'name';
+    this.width = width;
+    this.height = height;
     this.div = document.createElement('div');
-    
+    this.div.className = 'shape';
+    this.div.style.width = width + 'px';
+    this.div.style.height = height + 'px';
+    this.div.style.marginTop = Math.floor(Math.random() * (600 - height)) + 'px';
+    this.div.style.marginLeft = Math.floor(Math.random() * (600 - width)) + 'px';
+    this.div.addEventListener('click', function () {
+        this.describe();
+    }.bind(this));
+    this.div.addEventListener('dblclick', this.removeShape);
     document.getElementById('myCanvas').appendChild(this.div);
 }
 
 //All Shape Methods
-//method to describe() that updates the stats in sidepanel
 
+//FIX ID NAMES**************************************
+//method describe() that updates the stats in sidepanel
+Shape.prototype.describe = function() {
+    document.getElementById('shapeName').value = this.name;
+    document.getElementById('').value = this.width;
+    document.getElementById('').value = this.height;
+    document.getElementById('').value = this.radius;
+    document.getElementById('').value = this.area();
+    document.getElementById('').value = this.perimeter();
+}
 
+//General Shape methods
+Shape.prototype.area = function () {
+    return this.width * this.height;
+}
+
+Shape.prototype.perimeter = function () {
+    return this.width * 2 + this.height * 2;
+}
 
 //doubleclick to remove shape from canvas
 Shape.prototype.removeShape = function() {
     this.remove();
 }
 
-//place shape in container random x and y
-
-
-
 //Circle Class
 function Circle(radius) {
-    Circle.prototype = Object.create(Shape.prototype);
-    Circle.prototype.constructor = Circle;
-
-    this.radius = document.querySelector('#circRadius').value + 'px';
-    this.div = document.createElement('div');
+    Shape.call(this, "Circle", radius, radius);
+    this.radius = radius;
     this.div.className = 'circle';
-    
-    document.getElementById('myCanvas').appendChild(this.div);
 }
+
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
 
 //Circle methods to define calculations
 Circle.prototype.area = function() {
-    return Math.PI * Math.pow(this.radius, 2);
+    return Math.PI * Math.pow(this.radius, 2); 
 }
 Circle.prototype.perimeter = function(){
-    return 2 * Math.PI * this.radius;
-}
-Circle.prototype.diameter = function(){
-    return 2 * this.radius;
+    return 2 * Math.PI * this.radius;      
 }
 
 //Triangle Class
 function Triangle(height) {
-    Triangle.prototype = Object.create(Shape.prototype);
-    Triangle.prototype.constructor = Triangle;
-
-    this.height = document.querySelector('#triHeight').value + 'px';
-    this.div = document.createElement('div');
+    Shape.call(this, "Triangle", height);
     this.div.className = 'triangle';
-    
-    
-    document.getElementById('myCanvas').appendChild(this.div);
+    this.div.style.width = 0;
+    this.div.style.height = 0;
+    this.div.style.borderLeftWidth = this.height;
+    this.div.style.borderBottomWidth = this.height;
 }
 
+Triangle.prototype = Object.create(Shape.prototype);
+Triangle.prototype.constructor = Triangle;
 
-//Triangle Methods to define claculations
+// //Triangle Methods to define claculations
+Triangle.prototype.area = function() { 
+    return (this.height * this.height) / 2;
+}
 
-//Rectangle Class
+Triangle.prototype.perimeter = function() {  
+    return 2 * this.height + math.sqrt(2* Math.pow(this.height, 2));
+}
+
+// //Rectangle Class
 function Rectangle(width, height) {
-    Rectangle.prototype = Object.create(Shape.prototype);
-    Rectangle.prototype.constructor = Rectangle;
-
-    this.width = document.querySelector('#recWidth').value + 'px';
-    this.height = document.querySelector('#recHeight').value + 'px';
-    this.div = document.createElement('div');
-    this.div.className = 'rectangle';
-    
-    document.getElementById('myCanvas').appendChild(this.div);
+       Shape.call(this, "Rectangle", width, height);
+        this.div.style.backgroundColor = 'green';
+        this.div.className = 'rectangle';
 }
 
-//Rectangle Methods to define calculations
+Rectangle.prototype = Object.create(Shape.prototype);
+Rectangle.prototype.constructor = Rectangle;
 
 //Square Class
 function Square(sideLength) {
-    Square.prototype = Object.create(Shape.prototype);
-    Square.prototype.constructor = Square;
-
-    this.width = document.querySelector('#sqWidth').value + 'px';
-    this.height = document.querySelector('#sqHeight').value + 'px';
-    this.div = document.createElement('div');
+    Shape.call(this, "Square", sideLength);
+    this.div.style.width = this.width + 'px';
     this.div.className = 'square';
-    
-    document.getElementById('myCanvas').appendChild(this.div);
 }
 
-//Square Methods to define calculations
+Square.prototype = Object.create(Shape.prototype);
+Square.prototype.constructor = Square;
+
+//event listeners
+document.getElementById('circleBtn').addEventListener('click', function () {
+    var radius = document.getElementById('circle').value;
+    new Circle(radius);
+})
+
+document.getElementById('triangleBtn').addEventListener('click', function () {
+    var height = document.getElementById('triHeight').value;
+    new Triangle(height);
+})
+
+document.getElementById('rectangleBtn').addEventListener('click', function () {
+    var width = document.getElementById('recWidth').value;
+    var height = document.getElementById('recHeight').value;
+    new Rectangle(width, height);
+})
+
+document.getElementById('squareBtn').addEventListener('click', function () {
+    var height = document.getElementById('sqSide').value;
+    new Square(height);
+})

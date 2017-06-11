@@ -1,33 +1,31 @@
 //OOP Class to make shapes:
 // Shape constructor
-function Shape(name, width, height) {
-    this.name = 'name';
+function Shape(width, height) {
+    this.name = 'Shape';
     this.width = width;
     this.height = height;
     this.div = document.createElement('div');
     this.div.className = 'shape';
     this.div.style.width = width + 'px';
     this.div.style.height = height + 'px';
-    this.div.style.marginTop = Math.floor(Math.random() * (600 - height)) + 'px';
     this.div.style.marginLeft = Math.floor(Math.random() * (600 - width)) + 'px';
+    this.div.style.marginTop = Math.floor(Math.random() * (600 - height)) + 'px';
+    document.getElementById('myCanvas').appendChild(this.div);
     this.div.addEventListener('click', function () {
         this.describe();
     }.bind(this));
     this.div.addEventListener('dblclick', this.removeShape);
-    document.getElementById('myCanvas').appendChild(this.div);
 }
 
-//All Shape Methods
 
-//FIX ID NAMES**************************************
 //method describe() that updates the stats in sidepanel
 Shape.prototype.describe = function() {
-    document.getElementById('shapeName').value = this.name;
-    document.getElementById('').value = this.width;
-    document.getElementById('').value = this.height;
-    document.getElementById('').value = this.radius;
-    document.getElementById('').value = this.area();
-    document.getElementById('').value = this.perimeter();
+    document.getElementById('shapeName').innerHTML= this.name;
+    document.getElementById('currentWidth').innerHTML = this.width;
+    document.getElementById('currentHeight').innerHTML = this.height;
+    document.getElementById('currentRadius').innerHTML = this.radius;
+    document.getElementById('currentArea').innerHTML = this.area();
+    document.getElementById('currentPerimeter').innerHTML = this.perimeter();
 }
 
 //General Shape methods
@@ -46,7 +44,8 @@ Shape.prototype.removeShape = function() {
 
 //Circle Class
 function Circle(radius) {
-    Shape.call(this, "Circle", radius, radius);
+    Shape.call(this, radius, radius);
+    this.name = "Circle";
     this.radius = radius;
     this.div.className = 'circle';
 }
@@ -64,7 +63,8 @@ Circle.prototype.perimeter = function(){
 
 //Triangle Class
 function Triangle(height) {
-    Shape.call(this, "Triangle", height);
+    Shape.call(this, height);
+    this.name = "Triangle";
     this.div.className = 'triangle';
     this.div.style.width = 0;
     this.div.style.height = 0;
@@ -86,8 +86,8 @@ Triangle.prototype.perimeter = function() {
 
 // //Rectangle Class
 function Rectangle(width, height) {
-       Shape.call(this, "Rectangle", width, height);
-        this.div.style.backgroundColor = 'green';
+       Shape.call(this, width, height);
+       this.name = "Rectangle";
         this.div.className = 'rectangle';
 }
 
@@ -95,9 +95,9 @@ Rectangle.prototype = Object.create(Shape.prototype);
 Rectangle.prototype.constructor = Rectangle;
 
 //Square Class
-function Square(sideLength) {
-    Shape.call(this, "Square", sideLength);
-    this.div.style.width = this.width + 'px';
+function Square(height) {
+    Shape.call(this, height, height);
+    this.name = "Square";
     this.div.className = 'square';
 }
 
